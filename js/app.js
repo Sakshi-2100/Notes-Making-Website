@@ -3,6 +3,7 @@ showNotes();
 let addBtn = document.getElementById('addBtn');
 addBtn.addEventListener("click", function (e) {
     let addTxt = document.getElementById('addTxt');
+    let addTitle = document.getElementById('addTitle');
     let notes = localStorage.getItem("notes");
     if (notes == null) {
         notesObj = [];
@@ -10,9 +11,14 @@ addBtn.addEventListener("click", function (e) {
     else {
         notesObj = JSON.parse(notes);
     }
-    notesObj.push(addTxt.value);
+    let myObj = {
+        title: addTitle.value,
+        text: addTxt.value
+    }
+    notesObj.push(myObj);
     localStorage.setItem("notes", JSON.stringify(notesObj));
     addTxt.value = "";
+    addTitle.value="";
     // console.log(notesObj);
     showNotes();
 });
@@ -30,9 +36,9 @@ function showNotes() {
         html += `            
         <div class="card my-2 mx-2 noteCard" style="width: 18rem;">      
         <div class="card-body">
-            <h5 class="card-title">Note ${index+1}</h5>
+            <h5 class="card-title">${element.title}</h5>
             <div class="mb-3">
-                <p class="card-text"> ${element} </p>
+                <p class="card-text"> ${element.text} </p>
             </div>
             <button class="btn btn-primary" id="${index}" onclick = "deleteNote(this.id)">Delete note</button>
         </div>
