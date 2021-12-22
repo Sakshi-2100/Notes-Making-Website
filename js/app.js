@@ -72,9 +72,12 @@ function deleteNote(index){
 let search =document.getElementById('searchTxt');
 search.addEventListener("input",function(){
     let inputVal = search.value.toLowerCase();
+    // console.log("Event fired" , inputVal)
     let noteCards = document.getElementsByClassName('noteCard');
+    // console.log(noteCards)
      Array.from(noteCards).forEach(function(element){
         let cardTxt = element.getElementsByTagName('p')[0].innerText;
+        // console.log(cardTxt);
         if(cardTxt.includes(inputVal)){
             element.style.display = "block";
         }
